@@ -42,9 +42,7 @@ const ShortestPathBFS = (
             }
         }
     }
-    /**
-     * compute paths (return the array of stations in the path)
-     */
+
     const path: string[] = [];
     let currentStation: string = end;
     path.push(currentStation);
