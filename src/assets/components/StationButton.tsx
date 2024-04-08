@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ShortestPathBFS from "../../Algorithm/shortestPathBFS";
 import Stations_sg from "../Static/Stations_neighbours";
-import React from "react";
 
 interface Props {
     stations: station[];
