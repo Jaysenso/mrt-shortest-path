@@ -1,8 +1,6 @@
-import { useState } from "react";
-
-import MrtMap from "../assets/components/MrtMap";
+import MrtMap from "../assets/Static/MrtMap";
 import StationButton from "../assets/components/StationButton";
-import Stations from "../assets/Stations";
+import Stations from "../assets/Static/Stations_pos";
 const Home = () => {
     return (
         <div style={{ position: "relative", width: "100%", height: "100%" }}>

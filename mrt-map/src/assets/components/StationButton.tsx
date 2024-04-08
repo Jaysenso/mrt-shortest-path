@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ShortestPathBFS from "../../Algorithm/shortestPathBFS";
-import Stations_adjList from "../Stations_AdjList";
+import Stations_sg from "../Static/Stations_neighbours";
 
 interface Props {
     stations: station[];
@@ -16,23 +16,34 @@ const StationButton = ({ stations }: Props) => {
     const [endStation, setEndStation] = useState<string>("");
     const [shortestPath, setShortestPath] = useState<string[]>([]);
 
-    const handleCircleClick = (id: string) => {
+    const handleClickCircle = (id: string) => {
         if (startStation === "") {
             setStartStation(id);
-        } else if (startStation !== id) {
+            if (endStation) {
+                setShortestPath(ShortestPathBFS(Stations_sg, id, endStation));
+            }
+        } else if (startStation === id) {
+            setStartStation("");
+            setShortestPath([]);
+            if (endStation === id) {
+                setEndStation("");
+                setShortestPath([]);
+            }
+        } else if (endStation === "") {
             setEndStation(id);
-            setShortestPath(
-                ShortestPathBFS(Stations_adjList, startStation, endStation)
-            );
+            setShortestPath(ShortestPathBFS(Stations_sg, startStation, id));
+        } else if (endStation === id) {
+            setEndStation("");
+            setShortestPath([]);
         }
     };
 
-    const handleCircleFill = (id: string) => {
+    const fillCircle = (id: string) => {
         if (startStation === id) return "red";
-        else if (endStation === id) return "black";
-        else if (shortestPath.length > 0 && shortestPath.includes(id))
-            return "green";
-        else return "white";
+        if (endStation === id) return "black";
+        if (startStation && endStation && shortestPath.includes(id))
+            return "cyan";
+        return "white";
     };
 
     return (
@@ -49,8 +60,8 @@ const StationButton = ({ stations }: Props) => {
                         cx={station.cx}
                         cy={station.cy}
                         r={station.r}
-                        onClick={() => handleCircleClick(station.id)}
-                        fill={handleCircleFill(station.id)}
+                        onClick={() => handleClickCircle(station.id)}
+                        fill={fillCircle(station.id)}
                         stroke="#fa9e0d"
                     />
                 ))}

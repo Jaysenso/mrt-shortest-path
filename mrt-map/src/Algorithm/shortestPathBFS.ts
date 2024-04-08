@@ -13,42 +13,48 @@ const ShortestPathBFS = (
 ) => {
     const par = new Map<string, string>();
     const dist = new Map<string, number>();
-    const visited = new Set<string>();
+    const stationsMap = new Map<string, string[]>(Object.entries(graph));
+    const q: string[] = [];
+    let node: any;
 
     for (const key in graph) {
         par.set(key, "");
         dist.set(key, Infinity);
     }
-    console.log(par, dist);
 
-    const q: string[] = [];
     dist.set(start, 0);
     q.push(start);
-    visited.add(start);
 
     while (q.length > 0) {
-        const node = q.shift()!;
-        for (const neighbour of graph[node]) {
-            if (!visited.has(neighbour)) {
-                par.set(neighbour, node);
-                dist.set(neighbour, dist.get(neighbour)! + 1);
-                q.push(neighbour);
-                visited.add(neighbour);
-                console.log(par, dist);
+        node = q.shift();
+        if (node !== undefined) {
+            for (const neighbour of stationsMap.get(node)!) {
+                if (dist.get(neighbour) === Infinity) {
+                    par.set(neighbour, node);
+                    dist.set(
+                        neighbour,
+                        dist.get(neighbour) === Infinity
+                            ? 1
+                            : dist.get(neighbour)! + 1
+                    );
+                    q.push(neighbour);
+                }
             }
         }
     }
-
     /**
      * compute paths (return the array of stations in the path)
      */
     const path: string[] = [];
-    // let currentStation: string = end;
-    // path.push(currentStation);
-    // while (par.get(currentStation) !== "") {
-    //     currentStation = par.get(currentStation)!;
-    //     path.push(currentStation);
-    // }
+    let currentStation: string = end;
+    path.push(currentStation);
+    while (par.get(currentStation) !== "") {
+        currentStation = par.get(currentStation)!;
+        path.push(currentStation);
+    }
+
+    console.log(`Start Station : ${start} End Station : ${end}`);
+    console.log(`Shortest Path: ${path}`);
     return path;
 };
 
