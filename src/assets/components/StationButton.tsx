@@ -43,7 +43,7 @@ const StationButton = ({ stations }: Props) => {
         if (endStation === id) return "black";
         if (startStation && endStation && shortestPath.includes(id))
             return "cyan";
-        return "black";
+        return "white";
     };
 
     return (
