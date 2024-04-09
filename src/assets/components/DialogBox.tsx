@@ -35,7 +35,7 @@ export default function DialogBox() {
                     <DialogContentText id="alert-dialog-description">
                         Please select your starting and ending stations. If you
                         need to change your selection, simply click on the
-                        station again to deselect it
+                        station again to deselect it.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

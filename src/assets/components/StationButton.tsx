@@ -43,11 +43,11 @@ const StationButton = ({ stations }: Props) => {
         if (endStation === id) return "black";
         if (startStation && endStation && shortestPath.includes(id))
             return "cyan";
-        return "white";
+        return "black";
     };
 
     return (
-        <div style={{ position: "absolute", top: 0, left: 0 }}>
+        <div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1410 1010"

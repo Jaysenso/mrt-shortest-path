@@ -1,6 +1,6 @@
 import MrtMap from "../assets/Static/MrtMap";
 import StationButton from "../assets/components/StationButton";
-import Stations from "../assets/Static/Stations_pos";
+import stations_pos from "../assets/Static/Stations_pos";
 import DialogBox from "../assets/components/DialogBox";
 const Home = () => {
     return (
@@ -16,10 +16,19 @@ const Home = () => {
                 <DialogBox />
             </div>
             <div
-                style={{ position: "relative", width: "100%", height: "100%" }}
+                style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
                 <MrtMap />
-                <StationButton stations={Stations} />
+                <div style={{ position: "absolute" }}>
+                    <StationButton stations={stations_pos} />
+                </div>
             </div>
         </>
     );
